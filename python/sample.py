@@ -10,7 +10,7 @@ class Sample:
         print(self.ml.info_market('binance', 'eth_btc'))
         print(self.ml.get_markets('binance'))
         
-        # Replay sample
+        # Replay sample (Type=None means get Trades and Orderbooks)
         self.ml.init_replayer(self.event, 'binance', 'eth_btc', '2020-04-06', '2020-04-08', None, self.event_error)
        
     # Replay  On event - callback
