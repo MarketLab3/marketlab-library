@@ -1,7 +1,7 @@
 # Libraries for MarketLab
-Website: https://www.marketlab.app  
-Documentation: https://www.marketlab.app/documentation  
-Swagger: https://www.marketlab.app/swagger
+Website: https://www.market-lab.app  
+Documentation: https://www.market-lab.app/documentation  
+Swagger: https://www.market-lab.app/swagger
 
 ## Python
 Download python lib from this repository. Then:
@@ -26,4 +26,39 @@ def on_error(message):
 ```
 
 ## .NET - C#
-Comming soon
+*Beta version*
+Compile the projet to get the DLL and add it to your own project (Nuget coming soon). Then:
+
+```csharp
+// These fonctions must be used in a real project with class, etc.
+
+using MarketLab;
+
+// Init lib
+MarketLabAPI ml = new MarketLabAP ('YOUR_API_KEY}');
+
+// Get list of exchanges
+RootObjectExchanges list_exchanges = ml.get_exchanges();
+
+// Get list of markets for an exchange
+RootObjectMarkets list_markets = ml.get_markets('binance');
+
+// Get information about a market
+RootObjectInformationMarket info_market = ml.get_information_market('binance','eth_btc');
+
+// Init replay, set false at the end to start it
+ml.init_replay(callback, 'binance', 'eth_btc', '2020-04-06', '2020-04-08', 'trade', true);
+
+// Callback on event (trade and orderbook)
+void callback(Trade last_trade, Orderbook last_orderbook, MarketLabAPI.Event_type last_event_type) {
+    // Add your trading algorithm here
+
+    // Sample to get the price of the better ask and bid:
+    if(last_orderbook != null){
+        double best_ask = last_orderbook.orderbooks["asks"][0].price;
+        double best_bid = last_orderbook.orderbooks["bids"][0].price;
+    }
+
+    // Event_type indicates if the last event is a trade, an orderbook or the end of replay.
+}
+```
