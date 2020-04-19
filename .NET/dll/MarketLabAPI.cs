@@ -388,8 +388,16 @@ namespace MarketLab {
             }
         }
 
-        // Download files
-        private bool download_files(string exchange, string market, string start_date, string end_date, string type = null) {
+        /// <summary>
+        /// Download files for indaicated date
+        /// </summary>
+        /// <param name="exchange">Name of exchange to download</param>
+        /// <param name="market">Name of market to download</param>
+        /// <param name="start_date">Date of the first file to downlaod</param>
+        /// <param name="end_date">Date of the last file to downlaod</param>
+        /// <param name="type">Type of data ('trade' or 'orderbook'. Set to null for both)</param>
+        /// <returns></returns>
+        public bool download_files(string exchange, string market, string start_date, string end_date, string type = null) {
             try
             {
                 // Use API to get list of files

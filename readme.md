@@ -35,7 +35,7 @@ Compile the projet to get the DLL and add it to your own project (Nuget coming s
 using MarketLab;
 
 // Init lib
-MarketLabAPI ml = new MarketLabAP ('YOUR_API_KEY}');
+MarketLabAPI ml = new MarketLabAP ('{YOUR_API_KEY}');
 
 // Get list of exchanges
 RootObjectExchanges list_exchanges = ml.get_exchanges();
