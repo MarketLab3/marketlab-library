@@ -75,14 +75,17 @@ namespace MarketLab {
         /// <summary>
         /// Get information about a market
         /// </summary>
-        /// <param name="exchange">name of exchange</param>
-        /// <param name="market">name of market</param>
+        /// <param name="exchange">Name of exchange</param>
+        /// <param name="market">Name of market</param>
+        /// <param name="type">Type of data ('trade' or 'orderbook'. Set to null for both)</param>
         /// <returns>Object with status of request and all informations about a market</returns>
-        public RootObjectInformationMarket get_information_market(string exchange, string market) {
+        public RootObjectInformationMarket get_information_market(string exchange, string market, string type = null) {
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("exchange", exchange);
             parameters.Add("market", market);
+            if(type != null)
+                parameters.Add("type", type);
             try
             {
                 string json = this.execute_request("info_market", parameters);
