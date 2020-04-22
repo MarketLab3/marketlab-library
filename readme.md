@@ -3,36 +3,20 @@ Website: https://www.market-lab.app
 Documentation: https://www.market-lab.app/documentation  
 Swagger: https://www.market-lab.app/swagger
 
-## Python
-Download python lib from this repository. Then:
-```python
-import maketlab
+Libraries for:
+* Python3
+* .NET
 
-# Init lib with api key
-ml = maketlab.MarketLab('{YOUR_API_KEY}')
+## .NET
 
-# Init the raplayer with the parameters - Optional: {TYPE} and callback on_error
-ml.init_replayer(event, '{EXCHANGE}', '{MARKET}', '{START_DATE}', '{END_DATE}', '{TYPE}', on_error))
-
-# On event - callback
-def event(last_orderbook, last_trade):
-    print(last_orderbook)
-    print(last_trade)
-    # add you algorithm here to backtest your strategy
-
-# On event error
-def on_error(message):
-    print(message) # quota reached, data not avaible, plan inactive, etc.
+### Install
+Find and install the [MarketLab](https://www.nuget.org/packages/MarketLab/) NuGet package into your Project.  See [more help](https://www.google.com/search?q=install+nuget+package) for installing packages;
+``` PowerShell
+PM> Install-Package MarketLab
 ```
 
-## .NET - C#
-
-### Install ###
-```
-Install-Package MarketLab
-```
-
-```csharp
+### Example usage in C#
+``` csharp
 // These fonctions must be used in a real project with class, etc.
 
 using MarketLab;
@@ -64,4 +48,26 @@ void callback(Trade last_trade, Orderbook last_orderbook, MarketLabAPI.Event_typ
 
     // Event_type indicates if the last event is a trade, an orderbook or the end of replay.
 }
+```
+
+## Python
+Download python lib from this repository. Then:
+```python
+import maketlab
+
+# Init lib with api key
+ml = maketlab.MarketLab('{YOUR_API_KEY}')
+
+# Init the raplayer with the parameters - Optional: {TYPE} and callback on_error
+ml.init_replayer(event, '{EXCHANGE}', '{MARKET}', '{START_DATE}', '{END_DATE}', '{TYPE}', on_error))
+
+# On event - callback
+def event(last_orderbook, last_trade):
+    print(last_orderbook)
+    print(last_trade)
+    # add you algorithm here to backtest your strategy
+
+# On event error
+def on_error(message):
+    print(message) # quota reached, data not avaible, plan inactive, etc.
 ```
