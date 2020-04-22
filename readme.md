@@ -26,8 +26,11 @@ def on_error(message):
 ```
 
 ## .NET - C#
-*Beta version*
-Compile the projet to get the DLL and add it to your own project (Nuget coming soon). Then:
+
+### Install ###
+```
+Install-Package MarketLab
+```
 
 ```csharp
 // These fonctions must be used in a real project with class, etc.

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Windows.Forms;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Data;
@@ -492,11 +491,10 @@ namespace MarketLab {
             
             errors.Add(data);
             if (this.show_errors) { 
-                Console.WriteLine(data);
                 if(error!=null)
-                    MessageBox.Show(error.message, "Error API", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Console.WriteLine(error.message);
                 else
-                    MessageBox.Show(data, "Error API", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Console.WriteLine(data);
             }
             return;
         }

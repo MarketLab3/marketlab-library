@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>MarketLab - backtest trading algorithm</Title>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>MarketLab_lib</RootNamespace>
+    <PackageId>MarketLab</PackageId>
+    <Authors>MarketLab - Charles D.</Authors>
+    <Company>MarketLab</Company>
+    <Product>MarketLab library .NET</Product>
+    <Description>Library to connect to MarketLab API. Get historical markets data to backtest your trading strategy on a cryptocurrencies exchanges like Binance, Poloniex, etc. This library includes a replaying engine. Get help from the documentation and example.</Description>
+    <Copyright />
+    <PackageLicenseFile>LICENCE</PackageLicenseFile>
+    <PackageProjectUrl>https://www.market-lab.app/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/charle-s/marketlab-library</RepositoryUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <language>en</language>
+    <PackageIcon>256x256-logo-favicon.png</PackageIcon>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>backtest; trading; crypto; historical data; marketlab; Binance; Poloniex; Coinbase; Kraken</PackageTags>
+    <RepositoryType>Git</RepositoryType>
+    <PackageReleaseNotes>For API MarketLab version 1</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RestSharp" Version="106.10.1" />
+    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\OneDrive\_Projets\Marketlab\Logo\favicon\256x256-logo-favicon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\..\LICENCE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
