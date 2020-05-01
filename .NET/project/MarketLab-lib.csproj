@@ -12,14 +12,17 @@
     <Copyright />
     <PackageLicenseFile>LICENCE</PackageLicenseFile>
     <PackageProjectUrl>https://www.market-lab.app/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/charle-s/marketlab-library</RepositoryUrl>
+    <RepositoryUrl>https://github.com/MarketLab3/marketlab-library</RepositoryUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <language>en</language>
     <PackageIcon>256x256-logo-favicon.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>backtest; trading; crypto; historical data; marketlab; Binance; Poloniex; Coinbase; Kraken</PackageTags>
     <RepositoryType>Git</RepositoryType>
-    <PackageReleaseNotes>For API MarketLab version 1</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix bug on posibility to return an object on callback. Now is by an EventHandler</PackageReleaseNotes>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
+    <Version>1.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

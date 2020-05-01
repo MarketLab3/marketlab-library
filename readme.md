@@ -34,7 +34,7 @@ RootObjectMarkets list_markets = ml.get_markets('binance');
 RootObjectInformationMarket info_market = ml.get_information_market('binance','eth_btc');
 
 // Init replay, set false at the end to start it
-ml.init_replay(callback, 'binance', 'eth_btc', '2020-04-06', '2020-04-08', 'trade', true);
+ml.init_replay(callback, 'binance', 'eth_btc', '2020-04-06', '2020-04-08', 'trade', stuffDone, true);
 
 // Callback on event (trade and orderbook)
 void callback(Trade last_trade, Orderbook last_orderbook, MarketLabAPI.Event_type last_event_type) {
@@ -47,6 +47,16 @@ void callback(Trade last_trade, Orderbook last_orderbook, MarketLabAPI.Event_typ
     }
 
     // Event_type indicates if the last event is a trade, an orderbook or the end of replay.
+
+    // For exemple, you can call a class to do an action and get the returned object in variable
+    // Your EventHandler will be call by the library
+    object data = DoStuff();
+    return data ;
+}
+
+// Function call on the EventHandler
+private void stuffDone(object data, EventArgs e){
+     Console.WriteLine(data.ToString());
 }
 ```
 

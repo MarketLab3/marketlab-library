@@ -41,9 +41,11 @@ namespace MarketLab {
             }
         }
         
-        public delegate void CallBack(Trade last_trade, Orderbook last_orderbook, Event_type last_event_type);
-        
+        public delegate object CallBack(Trade last_trade, Orderbook last_orderbook, Event_type last_event_type);
+        private event EventHandler event_object = null;
         private CallBack callback = null;
+
+        private object object_callback = null;
         private string replay_exchange = null;
         private string replay_market = null;
         private string replay_type = null;
@@ -186,9 +188,10 @@ namespace MarketLab {
         /// <param name="start_date">Date to start the replay</param>
         /// <param name="end_date">Date to end the replay</param>
         /// <param name="type">Type of data to replay ('trade' or 'orderbook'. Set to null for both)</param>
+        /// <param name="event_function">Event handler call when the callback return an object</param>
         /// <param name="start">Set to true to start the replay directly</param>
         /// <returns></returns>
-        public bool init_replay(CallBack callback, string exchange, string market, string start_date, string end_date, string type = null, bool start = false) {
+        public bool init_replay(CallBack callback, string exchange, string market, string start_date, string end_date, string type = null, EventHandler event_function = null, bool start = false) {
             // Init data
             this.callback = new CallBack(callback);
             this.replay_exchange = exchange;
@@ -196,6 +199,9 @@ namespace MarketLab {
             this.replay_start_date = start_date;
             this.replay_end_date = end_date;
             this.replay_type = type;
+
+            if(event_function != null)
+                this.event_object += new EventHandler(event_function);
 
             if (start == true)
                 start_replay();
@@ -212,8 +218,9 @@ namespace MarketLab {
                 thread_replay = new Thread(work_replay);
                 thread_replay.Start();
             }
-            else
+            else {
                 thread_replay.Resume();
+            }
         }
 
         /// <summary>
@@ -223,17 +230,22 @@ namespace MarketLab {
         public void stop_replay(bool definitely = true) {
             if(thread_replay != null && thread_replay.IsAlive)
             {
-                try { 
-                if (definitely == true) {
-                    thread_replay.Resume();
-                    thread_replay.Abort();
-                }
-                else
-                    thread_replay.Suspend();
+                try {
+                    if (definitely == true)
+                    {
+                        thread_replay.Resume();
+                        thread_replay.Abort();
+                        thread_replay = null;
+                    }
+                    else
+                    {
+                        thread_replay.Suspend();
+                    }
                 }
                 catch
                 {
                     thread_replay.Abort();
+                    thread_replay = null;
                 }
             }
         }
@@ -302,14 +314,18 @@ namespace MarketLab {
                         last_event_type = Event_type.ORDERBOOK;
                     }
 
-                    // Callback
-                    this.callback(new Trade(last_trade), new Orderbook(last_orderbook), last_event_type);
+                    // Callback and call event
+                    object_callback = this.callback(new Trade(last_trade), new Orderbook(last_orderbook), last_event_type);
+                    if(event_object != null)
+                        event_object.Invoke(object_callback, new EventArgs());
 
                 }
                 this.free_object(df_events);
             }
             // End of replay
-            this.callback(null, null, Event_type.END);
+            object_callback = this.callback(null, null, Event_type.END);
+            if(event_object != null)
+                event_object.Invoke(object_callback, new EventArgs());
             return;
         }
 
