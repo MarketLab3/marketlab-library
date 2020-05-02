@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace MarketLab {
@@ -73,13 +74,13 @@ namespace MarketLab {
         public Trade(Dictionary<string, object> trade) {
             if (trade.Count != 7)
                 return;
-            timestamp = UInt64.Parse(trade["timestamp"].ToString().Replace('.', ','));
+            timestamp = UInt64.Parse(trade["timestamp"].ToString(), CultureInfo.InvariantCulture);
             base_currency = trade["base_currency"].ToString();
             counter_currency = trade["counter_currency"].ToString();
-            trade_time = UInt64.Parse(trade["trade_time"].ToString().Replace('.', ','));
+            trade_time = UInt64.Parse(trade["trade_time"].ToString(), CultureInfo.InvariantCulture);
             trade_id = trade["trade_id"].ToString();
-            price = double.Parse(trade["price"].ToString().Replace('.', ','));
-            size = double.Parse(trade["size"].ToString().Replace('.', ','));
+            price = double.Parse(trade["price"].ToString(), CultureInfo.InvariantCulture);
+            size = double.Parse(trade["size"].ToString(), CultureInfo.InvariantCulture);
         }
 
         public UInt64 timestamp { get; set; }
@@ -103,11 +104,11 @@ namespace MarketLab {
             if (orderbook.Count == 0)
                 return;
 
-            timestamp = UInt64.Parse(orderbook["timestamp"].ToString().Replace('.', ','));
+            timestamp = UInt64.Parse(orderbook["timestamp"].ToString(), CultureInfo.InvariantCulture);
             base_currency = orderbook["base_currency"].ToString();
             counter_currency = orderbook["counter_currency"].ToString();
             if(orderbook["tick_size"].ToString().Length > 0)
-                tick_size = double.Parse(orderbook["tick_size"].ToString().Replace('.', ','));
+                tick_size = double.Parse(orderbook["tick_size"].ToString(), CultureInfo.InvariantCulture);
 
             uint i = 0;
             Dictionary<string, List<Order>> data = new Dictionary<string, List<Order>> { };
@@ -121,12 +122,12 @@ namespace MarketLab {
                 {
                     Order o = new Order();
                     if (orderbook[type + "[" + i.ToString() + "].price"].ToString().Length > 1)
-                        o.price = double.Parse(orderbook[type + "[" + i.ToString() + "].price"].ToString().Replace(".", ","));
+                        o.price = double.Parse(orderbook[type + "[" + i.ToString() + "].price"].ToString(), CultureInfo.InvariantCulture);
                     else
                         o.price = -1;
 
                     if (orderbook[type + "[" + i.ToString() + "].size"].ToString().Length > 1)
-                        o.size = double.Parse(orderbook[type + "[" + i.ToString() + "].size"].ToString().Replace(".", ","));
+                        o.size = double.Parse(orderbook[type + "[" + i.ToString() + "].size"].ToString(), CultureInfo.InvariantCulture);
                     else
                         o.size = -1;
 

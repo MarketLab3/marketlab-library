@@ -371,9 +371,7 @@ namespace MarketLab {
                 tmp_object = null;
             }
 
-            csvTable.Dispose();
-            csvTable = null;
-                
+            csvTable.Dispose();               
         }
 
         // Send a request to the API
