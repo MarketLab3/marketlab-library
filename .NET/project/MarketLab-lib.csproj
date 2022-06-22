@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="106.10.1" />
     <PackageReference Include="SharpZipLib" Version="1.2.0" />
   </ItemGroup>
